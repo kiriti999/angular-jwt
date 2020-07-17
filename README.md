@@ -2,7 +2,7 @@
 
 ## Node project:
 
-Node express JWT implementation [Node JWT](https://github.com/kiriti999/node-jwt) with mongo db
+Node express JWT implementation with mongo db. Check out the repo: https://github.com/kiriti999/node-jwt 
 
 ## Development server
 
