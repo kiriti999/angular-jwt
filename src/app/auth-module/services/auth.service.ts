@@ -18,7 +18,6 @@ export class AuthService {
     constructor(private httpClient: HttpClient, public router: Router, private errorHandler: GlobalErrorHandler) {}
 
     register(user: User) {
-        // tslint:disable-next-line: max-line-length
         return this.httpClient.post(`${this.API_URL}/user/register`, user).pipe(catchError((error) => this.errorHandler.handleError(error)));
     }
 
@@ -26,10 +25,7 @@ export class AuthService {
         return this.httpClient.post<any>(`${this.API_URL}/user/login`, user).subscribe(
             (res: any) => {
                 localStorage.setItem('access_token', res.token);
-                this.getUserProfile(res.id).subscribe((profile) => {
-                    this.currentUser = profile;
-                    this.router.navigate(['/profile/' + profile._id]);
-                });
+                this.router.navigate(['/profile/' + res.id]);
             },
             (error) => this.errorHandler.handleError(error)
         );
@@ -50,12 +46,14 @@ export class AuthService {
         }
     }
 
-    getUserProfile(id): Observable<any> {
-        return this.httpClient.get(`${this.API_URL}/user/profile/${id}`).pipe(
-            map((res: Response) => {
-                return res || {};
-            }),
-            catchError((error) => this.errorHandler.handleError(error))
-        );
+    getUserProfile(id): any {
+        // return this.httpClient.get(`${this.API_URL}/user/profile/${id}`).pipe(
+        //     map((res: Response) => {
+        //         console.log('profile ', res);
+        //         return res || {};
+        //     }),
+        //     catchError((error) => this.errorHandler.handleError(error))
+        // );
+        return this.httpClient.get(`${this.API_URL}/user/profile/${id}`).toPromise();
     }
 }
