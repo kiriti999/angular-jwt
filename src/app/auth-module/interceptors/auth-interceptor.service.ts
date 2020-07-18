@@ -13,7 +13,8 @@ export class AuthInterceptorService implements HttpInterceptor {
         const accessToken = this.authService.getAccessToken();
         req = req.clone({
             setHeaders: {
-                'Content-Type': 'application/json',
+                'Accept-Encoding': 'gzip, deflate, br',
+                'Content-Type': 'application/json; charset=utf-8',
                 Authorization: `${accessToken}` || ''
             }
         });

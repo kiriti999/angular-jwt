@@ -122,8 +122,13 @@
               "devServerTarget": "angular-jwt:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "angular-jwt"
 }
