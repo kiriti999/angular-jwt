@@ -1,6 +1,8 @@
-# AngularJwt
+# Angular+Node+Express+Mongo JWT
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.0-next.0.
+## Node project:
+
+Node express JWT implementation with mongo db. Check out the repo: https://github.com/kiriti999/node-jwt 
 
 ## Development server
 
