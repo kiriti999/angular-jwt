@@ -24,11 +24,21 @@ export class RegisterComponent {
         this.authService.register(this.registerForm.value).subscribe((res: any) => {
             if (res) {
                 localStorage.setItem('access_token', res.token);
-                this.authService.getUserProfile(res.id).subscribe((profile) => {
-                    this.currentUser = profile;
-                    this.registerForm.reset();
-                    this.router.navigate(['/profile/' + profile._id]);
-                });
+                this.authService
+                    .getUserProfile(res.id)
+                    .then((profile: any) => {
+                        this.currentUser = profile;
+                        this.registerForm.reset();
+                        this.router.navigate(['/profile/' + profile._id]);
+                    })
+                    .catch((error: any) => {
+                        if (error.error && error.error.name === 'TokenExpiredError') {
+                            this.authService.logout();
+                            alert('Session expired. Please login to continue');
+                        }
+                        console.log('err: ', error);
+                    });
+
                 // this.router.navigate(['login']);
             }
         });

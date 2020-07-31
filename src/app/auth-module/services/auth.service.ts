@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 import { User } from '../models/user';
 import { environment } from 'src/environments/environment';
@@ -47,13 +46,6 @@ export class AuthService {
     }
 
     getUserProfile(id): any {
-        // return this.httpClient.get(`${this.API_URL}/user/profile/${id}`).pipe(
-        //     map((res: Response) => {
-        //         console.log('profile ', res);
-        //         return res || {};
-        //     }),
-        //     catchError((error) => this.errorHandler.handleError(error))
-        // );
         return this.httpClient.get(`${this.API_URL}/user/profile/${id}`).toPromise();
     }
 }
